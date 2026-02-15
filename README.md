@@ -1,105 +1,165 @@
-# Электронный Магазин
+# E-Shop Market
 
-## Сервер : Nest.js with Express +  MongoDB (Mongoose)
-## Клиент : Angular (Server-side rendering)
+A comprehensive e-commerce solution built with a modern technology stack, featuring a NestJS backend and an Angular Server-Side Rendered (SSR) frontend.
 
+## 🚀 Technologies
 
-## Описание
-- Магазин с товарами и администрацией
-- Typescript с декораторами, MongoDB и mongoose схемы, JWT Passport
-- Настройка визуального оформления с помощью css
+### Backend
+- **Framework:** [NestJS](https://nestjs.com/) (with Express)
+- **Database:** MongoDB with [Mongoose](https://mongoosejs.com/)
+- **Authentication:** Passport.js (JWT, Google OAuth2)
+- **API:** RESTful architecture
 
-## Установка
+### Frontend
+- **Framework:** [Angular](https://angular.io/)
+- **State Management:** [NgRx](https://ngrx.io/) (Store, Effects)
+- **UI Components:** Angular Material
+- **SSR:** Angular Universal for SEO and performance
+- **Styling:** SCSS
 
-```
-$ npm install
-```
+### Integrations
+- **Payments:** Stripe
+- **Media:** Cloudinary (Image management)
+- **Email:** SendGrid (Transactional emails)
+- **Security:** Google Recaptcha v2/v3
+- **Editor:** TinyMCE (Rich text editing)
 
-## Запуск приложения
+## ✨ Features
 
-```
-# разработка - запуск Бэкенда - port 4000
-$ npm run start
+- **Full-featured Store:** Product browsing, specific detailed views, shopping cart, and checkout process.
+- **Admin Dashboard:** Comprehensive management for products, orders, and users.
+- **Secure Authentication:** User registration and login support via Email/Password and Google OAuth.
+- **Optimized Performance:** Server-Side Rendering (SSR) ensures fast initial loads and SEO friendliness.
+- **Responsive Design:** Mobile-first approach using Angular Material and custom SCSS.
+- **Automated Notifications:** Email confirmations for orders and contact form submissions.
+- **Geo-Location:** IP-based location services.
 
-# разработка - запуск Фронтенда - port 3000
-$ npm run start:client
+## 🛠 Installation
 
-# watch mode server 
-$ npm run start:dev
+1. **Clone the repository:**
+   ```bash
+   git clone <repository-url>
+   cd eshop-market
+   ```
 
-# Билд ssr, watch
-$ npm run dev:ssr
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-# Билд ssr и serve
-$ npm run build:ssr
-$ npm run serve:ssr
-```
+## ⚙️ Configuration
 
-## Настройка окружения для Бэкенда
+1. **Create Environment File:**
+   Copy the example environment file to create your local `.env`:
+   ```bash
+   cp .env.example .env
+   ```
 
-- Переименуйте .env.example на .env
+2. **Configure Variables:**
+   Edit `.env` and fill in your specific credentials:
+
+   ```env
+   # Backend Configuration
+   SERVER_PORT=4000
+   SERVER_URL="http://localhost:4000"
+
+   # Frontend Configuration
+   ORIGIN="http://localhost:3000"
+
+   # Security (JWT)
+   JWT_EXPIRATION="7d"
+   JWT_SECRET="complex_secret_string"
+   COOKIE_KEY="complex_cookie_string"
+
+   # Database
+   MONGO_URI="mongodb://{user}:{password}@{host}:{port}/{databaseName}"
+
+   # Email Service (SendGrid)
+   # Get key from https://sendgrid.com
+   SENDGRID_KEY="SG.your_key..." 
+
+   # Cloudinary (Images)
+   # Get credentials from https://cloudinary.com
+   CLOUDINARY_NAME="your_cloud_name"
+   CLOUDINARY_KEY="your_api_key"
+   CLOUDINARY_SECRET="your_api_secret"
+
+   # Payments (Stripe)
+   # Get keys from https://stripe.com
+   STRIPE_PUBLISHABLE_KEY="pk_test_..."
+   STRIPE_SECRETKEY="sk_test_..."
+
+   # Yandex.Money (Optional)
+   YA_CLIENT_ID=""
+   YA_SECRETKEY=""
+
+   # Google OAuth
+   # Enable Google Login
+   GOOGLE_CLIENT_ID="your_google_client_id"
+   GOOGLE_CLIENT_SECRET="your_google_client_secret"
+
+   # Administration
+   # These emails receive admin notifications
+   ADMIN_EMAILS="admin@example.com, support@example.com"
+
+   # Google Recaptcha
+   RECAPTCHA_SERVER_KEY="your_server_key"
+   FE_RECAPTCHA_CLIENT_KEY="your_client_key"
+
+   # Geo Location (https://geolocation-db.com)
+   GEO_LOCATION_API_KEY="your_api_key"
+
+   # Frontend Public Keys (Must match above where applicable)
+   FE_STRIPE_PUBLISHABLE_KEY="pk_test_..."
+   FE_TINYMCE_API_KEY="your_tinymce_key"
+   ```
+
+## 🏃‍♂️ Running the Application
+
+### Development Mode
+
+Run the backend and frontend services separately for development.
 
 ```bash
-# BE HOST
-SERVER_PORT=4000
-SERVER_URL="http://localhost:4000"
+# 1. Start the Backend API (runs on port 4000)
+npm run start:dev
 
-# FE HOST
-ORIGIN="http://localhost:3000"
-
-# JWT settings
-JWT_EXPIRATION="7d"
-JWT_SECRET="выберитесвое"
-
-COOKIE_KEY="выберитесвое"
-
-# DB URI
-MONGO_URI="mongodb://{user}:{password}@{host}:{port}/{databaseName}"
-
-# Emails
-SENDGRID_KEY="установите, если вы хотите получать уведомления о заказе или контактную форму https://sendgrid.com (ADMIN_EMAILS и пользователь получит уведомление)"
-
-# Images
-CLOUDINARY_NAME="установите имя из api cloudinary https://cloudinary.com (для загрузки изображений)"
-CLOUDINARY_KEY="установите ключ из cloudinary api https://cloudinary.com (для загрузки изображений)"
-CLOUDINARY_SECRET="установите секрет из api cloudinary https://cloudinary.com (для загрузки изображений)"
-
-# Pay
-STRIPE_PUBLISHABLE_KEY="установите для оплаты заказов картой со stripe https://stripe.com"
-STRIPE_SECRETKEY="установите для оплаты заказов картой со stripe https://stripe.com"
-
-# Yandex.Money
-YA_CLIENT_ID=""
-YA_SECRETKEY=""
-
-# Google login
-GOOGLE_CLIENT_ID="установите для активации входа через Google"
-GOOGLE_CLIENT_SECRET="установите для активации входа через Google"
-
-# Электронные письма администратора получают уведомления от sendgrid при отправке заказа или контакта
-ADMIN_EMAILS="your@email.com, another@mail.com"
-
-# Ключ сервера Recaptcha от google
-RECAPTCHA_SERVER_KEY="RECAPTCHA_SERVER_KEY"
-
-# Получить местоположение по IP - https://geolocation-db.com
-GEO_LOCATION_API_KEY="GEO_LOCATION_API_KEY"
-
-# FE ENV SEND FROM BE
-FE_STRIPE_PUBLISHABLE_KEY="FE_STRIPE_PUBLISHABLE_KEY"
-FE_TINYMCE_API_KEY="FE_TINYMCE_API_KEY"
-FE_RECAPTCHA_CLIENT_KEY="FE_RECAPTCHA_CLIENT_KEY"
+# 2. Start the Angular Client (runs on port 3000/4200)
+npm run start:client
 ```
-## Docker
+
+### Server-Side Rendering (SSR)
+
+To test the application with Server-Side Rendering:
 
 ```bash
-# pull docker
+# Build and serve SSR
+npm run build:ssr
+npm run serve:ssr
+
+# Development watch mode for SSR
+npm run dev:ssr
+```
+
+## 🐳 Docker
+
+You can run the entire application using the provided Docker image.
+
+```bash
+# Pull the latest image
 docker pull pararel/eshop-mean:latest
 
-# run docker with env file
-docker run --env-file $PathToEnv --network=host pararel/eshop-mean:latest
+# Run with environment file
+docker run --env-file .env --network=host pararel/eshop-mean:latest
 
-# run docker with env set in cmd line
-docker run --e MONGO_URI=mongodbUrl --e OTHER_ENV=otherEnvValue --network=host pararel/eshop-mean:latest
-
+# Run with command-line arguments
+docker run \
+  -e MONGO_URI="mongodb://..." \
+  -e JWT_SECRET="secret" \
+  --network=host \
+  pararel/eshop-mean:latest
 ```
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
